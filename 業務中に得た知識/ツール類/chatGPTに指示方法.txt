@@ -1,0 +1,295 @@
+1. 目的をはっきり伝える
+
+「コミットで変更されたファイルを検出して、特定のディレクトリにコピーするスクリプトが欲しい」
+
+「ある環境では develop、別の環境では master をチェックアウトするようにしたい」
+
+👉 ゴール（やりたいこと）を一言でまとめると、スクリプトの全体像がつかみやすいです。
+
+2. 入力と出力を明示する
+
+入力: コミットSHA1を引数として受け取る
+
+出力: コピーしたファイル、削除したファイルのログを表示する
+
+外部ファイル: 「除外リストを diff_files_list_by_game.txt で管理する」
+
+👉 「何を受け取り」「何を返すのか」を書いてもらうと、扱う変数や処理の流れを明確にできます。
+
+3. 環境や前提条件を伝える
+
+OSやシェルの種類（Linux, macOS, Bash など）
+
+Git を使う前提（git diff, git checkout, git pull など）
+
+同期対象のディレクトリ構造（例: ../../001boat/...）
+
+👉 実行環境を伝えることで、エラーが出にくいコードを作れます。
+
+4. 処理の条件を具体的に書く
+
+「リストに載っているファイルはスキップする」
+
+「ファイルが存在しなければ削除する」
+
+「ログは 【Overwrite】 や 【Remove】 の形式で出す」
+
+👉 こういう条件を箇条書きで伝えてくれると、if文やループをどう書くかを的確に設計できます。
+
+5. コードスタイルや補助要件を伝える
+
+エラーハンドリングを入れるかどうか
+
+コメントを多めにしてほしいか、シンプルでよいか
+
+再利用しやすいように関数化してほしいか
+
+例：
+Bashでスクリプトを書いてください。
+- 引数でコミットSHA1を受け取る
+- そのコミットで変更されたファイル一覧を取得する
+- 一部ファイルは外部リストで除外する
+- 残りを2つのディレクトリにコピーする
+- 存在しない場合は削除する
+- Gitはboat環境はmaster、horseとbicycle環境はdevelopを使う
+- コピーや削除の処理をログとして出力する
+
+
+
+全体像（チーム開発の標準フロー）
+
+Issueで作業を起票（目的・範囲を明確化）
+
+作業ブランチを切る（例：feature/xxx）
+
+変更して コミット → push
+
+Pull Request（PR）作成
+
+GitHub Actions が PRで自動CI（テスト/Lint）
+
+レビュー承認＋CI成功（必須チェック）で マージ
+
+必要に応じて リリース（タグ/Release）
+
+この「5と6」を強制するのが、品質が崩れにくいチーム運用のコアです。ブランチ保護で「PR必須」「必須レビュー」「必須ステータスチェック」を設定できます。 
+GitHub Docs
+
+手順1: Organization（組織）を作る
+
+GitHubで Organization を作成
+
+Owner（管理者）を決める（通常は2名以上が望ましい）
+
+メンバーを招待
+
+組織のロール（Owner など）で、設定やリポジトリ管理の権限を分けます。 
+GitHub Docs
+
+手順2: Team（チーム）を作る（権限管理の土台）
+
+例：backend / frontend / ops / reviewers など
+
+Organization → Teams → Create team
+
+必要なら「入れ子チーム」も作成（大規模向け）
+
+チームは「リポジトリ権限」と「@メンション」の単位になります。 
+GitHub Docs
++1
+
+手順3: Repository を作る
+
+Organization 配下で New repository
+
+Public/Private を選ぶ
+
+README / LICENSE など必要に応じて追加
+
+Organization に対して十分な権限があればリポジトリを作成できます。 
+GitHub Docs
+
+手順4: 権限設計（最初に決めると後が楽）
+
+まずはシンプルに、以下が実務でよく使われます。
+
+Read：閲覧・議論のみ
+
+Triage：Issue/PR の整理（コードは触らない）
+
+Write：ブランチ作成・push・PR作成（一般開発者）
+
+Maintain：運用管理（設定の一部まで）
+
+Admin：全権限（最小人数に） 
+GitHub Docs
++1
+
+手順5: ブランチ戦略を決める（初心者向け推奨）
+
+迷ったらどちらかに寄せるのが安全です。
+
+A案：GitHub Flow（シンプル）
+
+常に main が最新
+
+feature/* → PR → main
+
+B案：develop あり（リリース単位がある場合）
+
+main（本番）と develop（統合）を分ける
+
+feature/* → PR → develop → まとまったら main
+
+手順6: ブランチ保護（必須設定）
+
+ここが「チーム開発が壊れない」要です。
+
+対象：main（必要なら develop も）
+
+GitHub → Repo → Settings → Branches で ブランチ保護ルールを作り、最低限これをONにします。 
+GitHub Docs
+
+Require a pull request before merging（PR必須）
+
+Require approvals（承認レビュー必須）（1〜2人）
+
+Require status checks to pass before merging（CI成功必須）
+
+（推奨）Require conversation resolution before merging（未解決コメントがあると不可）
+
+（推奨）Force push禁止 など
+
+ブランチ保護は「保護ブランチに対して、レビューやステータスチェック通過を強制できる」ことが公式に明記されています。 
+GitHub Docs
+
+また、必須レビュー運用では「必要な数の承認レビューがないとマージできない」挙動になります。 
+GitHub Docs
+
+手順7: PRでCIを動かす（GitHub Actions）
+7-1. ワークフローファイルを作る
+
+リポジトリに以下を追加します：
+
+.github/workflows/ci.yml
+
+最小例（PRが作られたら動く）：
+
+name: CI
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "ここにテスト/lintコマンドを置く"
+
+
+pull_request イベントや branches フィルタなどの書き方は GitHub Actions のワークフロー構文として定義されています。 
+GitHub Docs
+
+7-2. 「必須チェック化」する
+
+上のCIがPR上で Checks として表示されるようになったら、ブランチ保護で
+
+Require status checks …
+
+必須にしたいチェック名（例：CI あるいは CI / test）
+
+を選びます。これで CIが成功しないとマージできない状態になります。 
+GitHub Docs
+
+手順8: PRテンプレート／Issueテンプレートを入れる
+PRテンプレート（レビュー品質の底上げ）
+
+.github/pull_request_template.md を追加します。テンプレートを入れると、PR本文に自動で表示されます。 
+GitHub Docs
+
+例：
+
+## 概要
+-
+
+## 変更内容
+-
+
+## 動作確認
+-
+
+## リスク/レビュー観点
+-
+
+## 関連Issue
+-
+
+Issueテンプレート（起票を標準化）
+
+.github/ISSUE_TEMPLATE/config.yml を追加して、テンプレ選択画面を調整できます（空のIssue禁止も可能）。 
+GitHub Docs
+
+手順9: CODEOWNERS（領域別レビューを自動化）
+
+.github/CODEOWNERS を追加して、ディレクトリごとの責任チームを指定できます。
+さらにブランチ保護で「Code Owners のレビュー必須」をONにすると、指定オーナーの承認がないとマージできません。 
+GitHub Docs
++1
+
+例：
+
+/wp-content/themes/ @your-org/frontend
+/api/ @your-org/backend
+
+手順10: Secrets / Environments（デプロイが絡む場合）
+
+Actions で鍵やトークンを使うなら Secrets を使います 
+GitHub Docs
+
+本番デプロイ前に承認を挟むなら Environment（保護環境） を使い、Required reviewers を設定します
+（承認がないとジョブが進まない、自己承認禁止も可能） 
+GitHub Docs
++1
+
+手順11: セキュリティ（最低限：Dependabot）
+
+依存関係があるプロジェクトなら、Dependabot を有効にして脆弱性修正PRを自動化します。
+Dependabot Security Updates は、依存関係グラフとアラートが有効な場合に、修正PRを作成します。 
+GitHub Docs
+
+手順12: マージ方式を決める
+
+GitHubでは「Merge commit / Squash / Rebase」などマージ方式を設定できます。 
+GitHub Docs
+
+初心者チームでは、まず Squash merge（PR=1コミットにまとめる）に寄せると履歴が読みやすいことが多いです。
+
+最小の“完成形”チェックリスト
+
+ Organization / Team / Repo 作成 
+GitHub Docs
++1
+
+ Repo権限（Write/Maintain/Admin）設計 
+GitHub Docs
+
+ ブランチ保護（PR必須＋レビュー必須＋必須CI） 
+GitHub Docs
++1
+
+ Actions（pull_request CI） 
+GitHub Docs
+
+ PRテンプレ＋Issueテンプレ 
+GitHub Docs
++1
+
+ CODEOWNERS（必要なら） 
+GitHub Docs
+
+ Secrets/Environments（デプロイがあるなら） 
+GitHub Docs
++1
+
+ Dependabot（依存関係があるなら） 
+GitHub Docs

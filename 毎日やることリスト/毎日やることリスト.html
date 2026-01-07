@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoアプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>毎日やることリスト</h1>
+
+<form id="todo-form" autocomplete="off">
+  <label for="start-time">開始時間：</label>
+  <input type="time" id="start-time" required>
+
+  <label for="end-time">終了時間：</label>
+  <input type="time" id="end-time" required>
+
+  <input type="text" id="todo-input" placeholder="やることを入力" required>
+
+  <button type="submit">追加</button>
+</form>
+
+  <ul id="todo-list"></ul>
+
+  <script src="Untitled-1.js"></script>
+</body>
+</html>

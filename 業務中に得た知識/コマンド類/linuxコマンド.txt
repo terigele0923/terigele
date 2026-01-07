@@ -1,0 +1,85 @@
+ディレクトリ移動・編集: cd, ls, pwd, cat, less
+
+ファイル操作: cp, mv, rm, find, grep
+
+エディタ: vim or nano（最低限操作できればOK）
+
+プロセス確認: ps, top, htop
+
+権限操作: chmod, chown, sudo
+
+2.1 ファイル・ディレクトリ操作（頻度：高）
+
+cd : ディレクトリ移動
+
+ls : ファイル一覧表示
+
+pwd : 現在のディレクトリ表示
+
+mkdir : ディレクトリ作成
+
+touch : 空ファイル作成
+
+rm : 削除
+
+cp : コピー
+
+mv : 移動・名前変更
+
+2.2 状況確認・検索（頻度：高）
+
+cat : ファイル表示
+
+less / more : ページ単位で表示
+
+grep : テキスト検索
+
+find : ファイル検索
+
+file : 種類確認
+
+2.3 システム・プロセス管理（頻度：中～高）
+
+ps : プロセス確認
+
+top / htop : リソース状況表示
+
+kill / killall : プロセス終了
+
+df -h : ディスク使用量確認
+
+du -sh : フォルダ容量確認
+
+free -h : メモリ使用状況確認
+
+2.4 ネットワーク関連（頻度：中）
+
+ping : 接続確認
+
+curl / wget : Web 通信・ファイル取得
+
+ip a / ifconfig : IP 確認
+
+netstat -tuln / ss : ポート確認
+
+2.5 ファイル編集・パーミッション（頻度：中）
+
+chmod : 権限変更
+
+chown : 所有者変更
+
+nano / vim : ファイル編集
+
+echo : 出力
+
+tee : 出力保存 & 表示
+
+2.6 その他便利コマンド
+
+history : コマンド履歴表示
+
+alias : コマンド短縮登録
+
+clear : 画面クリア
+
+man <コマンド> : マニュアル表示

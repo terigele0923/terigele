@@ -1,0 +1,72 @@
+1. DOM操作系（要素取得・操作）
+document.getElementById('id') → ID指定で要素取得
+document.getElementsByClassName('class') → クラス名で複数要素取得
+document.getElementsByTagName('tag') → タグ名で複数要素取得
+document.querySelector('selector') → CSSセレクタで最初の要素取得
+document.querySelectorAll('selector') → CSSセレクタで全要素取得
+element.innerHTML → 要素のHTML内容取得・変更
+element.textContent → 要素のテキスト内容取得・変更
+element.setAttribute('attr', 'value') → 属性の追加・変更
+element.getAttribute('attr') → 属性値の取得
+element.classList.add('class') / remove / toggle → クラス操作
+element.appendChild(node) → 子要素追加
+element.remove() → 要素削除
+
+2. 配列・文字列操作
+配列: push(), pop(), shift(), unshift(), map(), filter(), forEach(), includes(), find()
+文字列: split(), join(), replace(), toUpperCase() / toLowerCase(), trim(), includes(), indexOf()
+
+3. イベント系
+element.addEventListener('click', func) → クリックイベント登録
+element.addEventListener('input', func) → 入力イベント登録
+element.removeEventListener('click', func) → イベント解除
+event.preventDefault() → デフォルト動作をキャンセル
+event.stopPropagation() → イベント伝播を停止
+
+
+HTMLのイベント属性
+
+1. マウスイベント系
+onclick → クリックされたとき
+ondblclick → ダブルクリックされたとき
+onmousedown → マウスボタンを押したとき
+onmouseup → マウスボタンを離したとき
+onmouseover → 要素にマウスが乗ったとき
+onmouseout → 要素からマウスが離れたとき
+onmousemove → マウスが動いたとき
+onmouseenter / onmouseleave → 要素への入退出（バブリングしない）
+
+2. キーボードイベント系
+onkeydown → キーが押されたとき
+onkeypress → キーが押されて文字が入力されるとき（非推奨）
+onkeyup → キーを離したとき
+
+3. フォームイベント系
+onchange → 値が変更されたとき（入力後フォーカスを離す場合）
+oninput → 入力値が変わったとき（リアルタイム）
+onsubmit → フォームが送信されたとき
+onreset → フォームがリセットされたとき
+onfocus → 要素にフォーカスが当たったとき
+onblur → 要素からフォーカスが外れたとき
+
+4. ウィンドウ / ドキュメントイベント系
+onload → ページや画像などが読み込まれたとき
+onunload → ページが離れられるとき
+onresize → ウィンドウサイズが変わったとき
+onscroll → スクロールしたとき
+
+5. ドラッグ＆ドロップ系
+ondragstart → ドラッグ開始
+ondrag → ドラッグ中
+ondrop → ドロップされたとき
+
+6. その他便利なイベント
+oncontextmenu → 右クリックメニューが開くとき
+onerror → 画像やスクリプトが読み込めなかったとき
+onmouseenter / onmouseleave → マウスが要素内に入る／出る
+
+7.phpの外部ファイルを読み込む関数includeとrequireの違い
+includeは対象ファイルなくても動作する。requireは対象ファイルはなければ動作しない。
+実務では：
+必須ファイル（DB接続, 設定ファイルなど） → require / require_once
+任意ファイル（テンプレート部品, オプションのモジュールなど） → include / include_once

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>電卓機</title>
+  <style>
+    body {
+      
+      font-family: 'Arial', sans-serif;
+      background-color: #fcfafa;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      margin: auto;
+      width: 320px;
+      border-radius: 10px;
+    }
+    h1 {
+      color: #333;
+    }
+    #inputField {
+      width: 210px;
+      height: 40px;
+      font-size: 20px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding-right: 10px;
+    }
+    input[type="button"] {
+      width: 50px;
+      height: 50px;
+      font-size: 18px;
+      margin: 2px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      background-color: #fff;
+    }
+    input[type="button"]:hover {
+      background-color: #e0e0e0;
+    }
+    form {
+      display: inline-block;
+      padding: 20px;
+    }
+    input.left {
+      display:block;
+      margin-right: auto;
+      margin-left: 0px;
+    }
+    input.left:hover {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>電卓機</h1>
+  <input type="text" id="inputField" readonly value=""><br>
+
+  <form onsubmit="return false;">
+    <div>
+      <input type="button" value="1" onclick="appendToInput('1')">
+      <input type="button" value="2" onclick="appendToInput('2')">
+      <input type="button" value="3" onclick="appendToInput('3')">
+      <input type="button" value="+" onclick="appendToInput('+')">
+    </div>
+    <div>
+      <input type="button" value="4" onclick="appendToInput('4')">
+      <input type="button" value="5" onclick="appendToInput('5')">
+      <input type="button" value="6" onclick="appendToInput('6')">
+      <input type="button" value="-" onclick="appendToInput('-')">
+    </div>
+    <div>
+      <input type="button" value="7" onclick="appendToInput('7')">
+      <input type="button" value="8" onclick="appendToInput('8')">
+      <input type="button" value="9" onclick="appendToInput('9')">
+      <input type="button" value="*" onclick="appendToInput('*')">
+    </div>
+    <div>
+      <input type="button" value="0" onclick="appendToInput('0')">
+      <input type="button" value="/" onclick="appendToInput('/')">
+      <input type="button" value="." onclick="appendToInput('.')">
+      <input type="button" value="C" onclick="clearInput()">
+      <input class="left" type="button" value="=" onclick="calculate()">
+    </div>
+  </form>
+
+  <script>
+    // 入力欄に数字や記号を追加
+    function appendToInput(value) {
+      const inputField = document.getElementById('inputField');
+      inputField.value += value;
+    }
+
+    // 入力欄をクリア
+    function clearInput() {
+      document.getElementById('inputField').value = '';
+    }
+
+    // 計算を実行
+    function calculate() {
+      const inputField = document.getElementById('inputField');
+      try {
+        inputField.value = eval(inputField.value);
+      } catch (error) {
+        inputField.value = 'Error';
+      }
+    }
+  </script>
+
+</body>
+</html>

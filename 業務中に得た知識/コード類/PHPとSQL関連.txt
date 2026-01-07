@@ -1,0 +1,114 @@
+よく使う関数メモ
+１，ファイル読み込み　require_once
+２，配列の中身を確認する　dump();
+
+<?php
+function getPDO(): PDO {
+    $host     = 'localhost';
+    $dbname   = 'your_database_name';
+    $username = 'your_username';
+    $password = 'your_password';
+    $charset  = 'utf8mb4';
+
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+    try {
+        $pdo = new PDO($dsn, $username, $password, [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // 例外でエラー通知
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // 結果を連想配列で
+            PDO::ATTR_EMULATE_PREPARES   => false,                  // ネイティブプリペアド
+        ]);
+        return $pdo;
+    } catch (PDOException $e) {
+        // 本番環境ではログに出力して、画面には一般的なエラー文のみ表示推奨
+        die("データベース接続に失敗しました: " . htmlspecialchars($e->getMessage()));
+    }
+}
+?>
+
+
+function getPDO():PDO{
+	$host = '';
+	$dbname = '';
+	$username = '';
+	$password = '';
+	$charset = '';
+
+	$dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+	try{
+		$pdo = new PDO($dsn,$username,$password,[
+			PDO::ATTR_ERRMODE	=> PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_DEFAULT_FETCH_MODE	=> PDO::FETCH_ASSOC,
+			PDO::ATTR_EMULATE_PREPARES	=>false,
+		]);
+		return $pdo;
+	}catch(PDOException $e){
+		die("データベース接続に失敗しました：".htmlspecialchars($e->getMessage()));
+	}
+}
+
+実際利用するときの例
+$email = '';
+$status = '';
+$sql = "select * from users where email = :email and status = :status";
+$stmt = $pdo->prepare(sql);
+$stmt->execute([
+	':email' => $email,
+	':status' => $status
+]);
+$users = $stmt->fetchAll();
+
+HTMLの　formと組み合わせて使う例
+
+$name = $_POST['name'] ?? '';
+$email = $_POST['email'] ?? '';
+
+$sql = "INSERT INTO users (name, email) VALUES (:name, :email)";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([
+    ':name'  => $name,
+    ':email' => $email
+]);
+PHPでのフェッチ型　　$data = $res->fetchRow(DB_FETCHMODE_ASSOC);　カッコの部分　に　0　1　2　と入力することもできます。
+モード名	　　　　値	結果の形式
+DB_FETCHMODE_ORDERED	0	数値インデックスのみ
+DB_FETCHMODE_ASSOC	1	カラム名による連想配列のみ
+DB_FETCHMODE_BOTH	2	両方（数値と文字列）←今これ
+
+
+
+
+手順
+１，バージョン変更される前自分はスタッシュして置いたコードを適用しました。
+２，VSCODEで確認しましたら、ローカルのコードはスタッシュのコードと同じくなっています。
+３，そのあとwinSCPでリモートのファイルを更新しました。
+私の予想なら、上記の手順で操作したら、ブラウザでの表示は変更する前の状態に戻る。
+でも結果としては、予想と違って、ブラウザでのレイアウトは崩れています。
+source　tree状の履歴を見たら、森山さんはdevelopブランチにマージした記録がありました。
+
+https://docs.google.com/spreadsheets/d/1crhEx0dBO3R79kagKjyT_zlQBV8yrgFUyYlOYoPASAY/edit?gid=1815695985#gid=1815695985プレビュー
+例）https://docs.google.com/spreadsheets/d/19sCTEFcZsrIqI6sNNKw6__8H0NB4BtCo0hvayN2oEG4/edit?gid=102464039#gid=102464039プレビュー
+
+isset() の意味
+「変数が定義されていて、かつ null ではないか」**をチェックします。
+isset($var) は「$var が存在していて null ではない」ときに true を返します。
+
+empty() の意味
+**「値が空かどうか（0, '', null, false, [], '0' など）」**をチェックします。
+
+empty($var) は「$var が未定義、もしくは空っぽ」なら true を返します。
+
+PHPのエラーを表示させる
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+ブロックレベルの汎用タグ
+タグ	        説明	使いどころ
+<div>	        汎用のブロックコンテナ	レイアウトのセクション分け、CSSでスタイルを適用
+<section>	文書内の意味的な区切り	記事の章やセクション、意味的なまとまり
+<article>	独立したコンテンツ	ブログ記事、ニュース記事など独立コンテンツ
+<header>	見出しエリア	ページやセクションのヘッダー
+<footer>	フッターエリア	ページやセクションのフッター
+<aside>	        補助的コンテンツ	サイドバー、広告、補足情報
+<nav>	        ナビゲーション	メニューやリンク集

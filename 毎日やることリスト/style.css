@@ -1,0 +1,46 @@
+body {
+  font-family: sans-serif;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  flex-wrap: nowrap;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 16px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background-color: rgba(224, 253, 253, 0.87);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  margin:5px 0px;
+  border-bottom: 1px solid #ddd;
+}
+
+li.done {
+  text-decoration: line-through;
+  color: gray;
+}

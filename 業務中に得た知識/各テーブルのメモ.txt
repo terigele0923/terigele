@@ -1,0 +1,157 @@
+ycom_abuselist_tbl                      : 不正/ブラックリスト
+ycom_access_ip_ctl_tbl                  : 管理画面アクセスIP制御
+ycom_accordingly_body_wigth_point       : user_level pttern point body_max body_min regdate update
+ycom_acheck_order_tbl                   : ？？？？？
+ycom_ad_accesslog_tbl                   : 広告アクセスログ
+ycom_ad_regcount_tbl                    : 広告ごとの売り上げ情報
+ycom_ad_toppage_tbl                     : 広告用トップページ設定　ページのURL情報　制御flag
+ycom_adcode_id 　　　　　　　　　　　　 : 広告コードマスタ
+ycom_add_point_event_tbl                : ポイント付与イベント設定 event_id level point
+ycom_add_point_log_tbl                  : ポイント加算ログ   user_id event_id user_point add_point indi_page_id 
+ycom_add_point_tbl                      : ポイント加算テーブル（マスタ）
+ycom_af_aficli_tbl                      : アフィリエイトクライアント設定？
+ycom_af_eeaf_tbl                        : アフィリエイト関連マスタ/ビュー
+ycom_affiliate_log                      : アフィリエイト計上ログ
+ycom_agency                             : 代理店マスタ
+ycom_attachimage_tbl                    : 画像添付ファイル
+ycom_autodel_tbl                        : 自動削除待ちキュー
+ycom_base_profile_tbl                   : プロフィール項目ベース                     調査必要
+ycom_bitcache_order_tbl                 : bitcache注文
+ycom_black_telno                        : 電話番号ブラックリスト
+ycom_calender_tbl                       : カレンダー/日付設定　　　　　　　　　　　　調査必要
+ycom_cdirect_order_tbl                  : CDirect課金オーダー
+ycom_char_level                         : キャラレベルマスタ
+ycom_char_readuser_cnt　　　            : キャラ別未読カウント
+ycom_charmail_stat                      : キャラ別メール送受信統計
+ycom_charuser_stat                      : キャラ別ユーザ統計
+ycom_chgmail_tmp                        : メールアドレス変更一時保管
+ycom_cnt_mailerr_tbl                    : メールエラー回数
+ycom_config                             : サイト共通設定                              重要：接続情報設定
+ycom_convert_log_tbl                    : コンバージョン/移行ログ
+ycom_convert_site                       : 移行元サイト設定
+ycom_csvreg_tbl　　　　　　　　　　　　 : CSV登録キュー・採番
+ycom_csvuser_sendcnt_tbl                : CSV経由ユーザへの送信回数
+ycom_defer_sub_tbl                      : 後払い明細
+ycom_defer_tbl / ycom_defer_tbl_defer_id_seq / ycom_defer_tblstatus : 後払い管理・採番・ステータス
+ycom_dkim_tbl                           : DKIM鍵情報
+ycom_domain_list_tbl      　　　　　　　: 利用ドメインマスタ
+ycom_domain_uselog_tbl                  : ドメイン使用履歴
+ycom_dummy_fromaddress_tbl              : ダミーFromアドレス
+ycom_edit_index / ycom_edit_index_index_id_seq : 編集インデックス管理
+ycom_epayment_order_tbl                 : ePayment注文
+ycom_event_config                       : イベント/キャンペーン設定
+ycom_f_userlist / ycom_f_userlist_customer_id_seq : （女性/相手側）会員マスタ・採番
+ycom_f_userstat                         : f側ユーザ統計
+ycom_f_visit_tbl                        : f側訪問ログ
+ycom_flag                               : フラグマスタ
+ycom_gigapoint_order_tbl                : ギガポイント注文
+ycom_imgfactory_group_tbl               : 画像グループ
+ycom_imgfactory_tbl / ycom_imgfactory_tbl_img_id_seq : 画像管理・採番
+ycom_index_id                           : インデックスID設定（移行系）
+ycom_indi_expected_course_page_tbl      : 予想コースページ設定
+ycom_indigroup_tbl                      : 予想ページグループ
+ycom_indipage_childpage_tbl             : 個別ページ子要素
+ycom_indipage_kaime_tbl                 : 買い目/舟券情報
+ycom_indipage_org_tbl                   : 元となる個別ページ
+ycom_indipage_tbl / ycom_indipage_tbl_sql : 個別ページ本体/ビュー
+ycom_indipage_visit_log                 : 個別ページ閲覧ログ
+ycom_indipage_waf_tbl                   : WAF/占い連携ページ
+ycom_info_blacklist_tbl                 : 問い合わせ系ブラックリスト
+ycom_info_owner / ycom_info_owner_info_id_seq : インフォメール送信元
+ycom_info_present_point_get_log         : インフォ経由ポイント付与ログ
+ycom_info_user                          : インフォメール配信先リンク
+ycom_infopage_tbl                       : インフォページコンテンツ
+ycom_inquiry_mail / ycom_inquiry_mail_subject / ycom_inquiry_tpl : 問い合わせメール本文/件名/テンプレ
+ycom_inquiry_user                       : 問い合わせユーザ情報
+ycom_ip_config                          : IPポリシー設定
+ycom_line_log_tbl                       : LINE送受信ログ
+ycom_link_config                        : リンクテキスト設定
+ycom_loginpath_code                     : ログインURLコード管理
+ycom_m_userlist                         : メイン会員マスタ・採番
+ycom_m_userstat                         : 会員統計
+ycom_m_visit_tbl                        : 訪問ログ
+ycom_mail_log_view                      : メールログビュー
+ycom_mail_template_tbl                  : メールテンプレート
+ycom_mati_tbl                           : 待機/待ち合わせ設定？
+ycom_mb_infopage_tbl                    : モバイル向けインフォページ
+ycom_mcoin_bank_order_tbl / ycom_mcoin_credit_order_tbl / ycom_mcoin_order_tbl : Mコイン注文
+ycom_message                            : メッセージ本体
+ycom_mng_menu_role                      : 管理メニュー権限
+ycom_mng_profile_tbl                    : 管理者プロフィール項目
+ycom_mngauth_tbl                        : 管理者アカウント
+ycom_mngosid_tbl                        : 管理者セッション/OSID
+ycom_moneytable                         : 課金ポイント設定
+ycom_moneytable_group / ycom_moneytable_group_id / ycom_moneytable_group_id_seq : 課金グループ
+ycom_multi_area                         : 対応エリアマスタ
+ycom_ngword_tbl                         : NGワード
+ycom_noticemail_conf_tbl                : 通知メール設定
+ycom_noticemail_conf4staff_tbl / _sql   : スタッフ向け通知設定/ビュー
+ycom_noticemail_tbl                     : 通知メールキュー/設定
+ycom_old_message                        : 過去メッセージ
+ycom_order_apex_tbl                     : APEX注文
+ycom_order_axes_bank_tbl / ycom_order_axes_credit_tbl : AXES（銀行/カード）注文
+ycom_order_bitcash_trans_tbl            : BitCashトランス注文
+ycom_order_ccheck_tbl                   : コンビニCCheck注文
+ycom_order_cdirect_tbl                  : CDirect注文
+ycom_order_credix_credit_tbl            : CREDIXカード注文
+ycom_order_digica_credit_post_tbl / ycom_order_digica_credit_tbl : デジカ注文
+ycom_order_gmo_au_easy / gmo_conveni / gmo_docomo_mb / gmo_softbank_pay / gmo_web_money : GMO系決済注文
+ycom_order_gmoney_tbl                   : G-Money注文
+ycom_order_linqsea_tbl                  : Linqsea注文
+ycom_order_mstocks_tbl                  : mStocks注文
+ycom_order_pagopay_tbl                  : PagoPay注文
+ycom_order_securitymoney_tbl            : セキュリティマネー注文
+ycom_order_smoney_tbl                   : SMoney注文
+ycom_order_techcoin_tbl                 : Techcoin注文
+ycom_order_telecom_netbank_tbl          : テレコムネットバンク注文
+ycom_order_telecom_term_tbl / _term30_tbl: テレコム継続課金注文
+ycom_order_telecomcredit_tbl / _2_tbl / _30_tbl : テレコム都度課金（種類別）
+ycom_order_telecomedy_tbl               : テレコムEdy注文
+ycom_order_zerocredit_tbl               : ゼロクレジット注文
+ycom_otid_user                          : ワンタイムID/仮ログイン
+ycom_out_indipage_tbl                   : 外部独立ページ
+ycom_pagedata_regform_tbl / _rel_tbl / _tblpage_id_seq : 登録フォーム定義とページ対応
+ycom_pair_level                         : ペアレベルマスタ
+ycom_pairlist_tbl / ycom_pairlist_tbl_sql : ペア情報
+ycom_panel_config                       : 管理パネル設定
+ycom_params / ycom_password / ycom_reg_status / ycom_usercode : ユーザー移行/状態コード関連
+ycom_payment_cnt_correct_hist           : 支払回数補正履歴
+ycom_payment_config                     : 決済設定
+ycom_payment_tbl / ycom_payment_tbl_payment_id_seq : 決済トランザクション
+ycom_paytrans_order_tbl                 : Paytrans注文
+ycom_pcinfo_conf_tbl / ycom_pcinfo_tbl  : PC識別情報/設定
+ycom_prereg                             : 事前登録
+ycom_profile_tbl / ycom_profile_f_tbl   : プロフィール項目（共通/女性用）
+ycom_profile_detail_tbl / _f_tbl        : プロフィール回答
+ycom_r18page_tbl                        : アダルトページ設定
+ycom_relay_list_tbl / ycom_relay_map_tbl: メール/SMSリレー先設定
+ycom_schedulemail_group                 : 予約メールグループ
+ycom_schedulemail_log / _log_id_seq     : 予約メール送信ログ
+ycom_schedulemail_tbl                   : 予約メール設定
+ycom_sendmail_tbl / ycom_sendmail_tbl_mail_id_seq : 送信メールキュー
+ycom_sharing_attachimage_tbl            : 共有画像
+ycom_sms_api_tbl / ycom_sms_body_conf / ycom_sms_send_body : SMS送信設定
+ycom_sms_log_tbl                        : SMS送信ログ
+ycom_special_use_point_tbl / _log_tbl / _rank_name_tbl : 特別ポイント利用マスタ・履歴
+ycom_sppage_css_tbl                     : スマホページCSS
+ycom_stafflist                          : スタッフマスタ
+ycom_step_log                           : ステップメール進捗？
+ycom_stepmail_group                     : ステップメールグループ
+ycom_stepmail_log / _log_id_seq         : ステップメール送信ログ
+ycom_stepmail_prereg                    : 仮登録ステップメール設定
+ycom_stepmail_tbl                       : ステップメール設定
+ycom_stock_message / ycom_stock_message_stock_id_seq : 定型文ストック
+ycom_sum_ope_chara / _site / _stf / _user: 運用サマリ（キャラ/サイト/スタッフ/ユーザー）
+ycom_tel_offer_tbl                      : 電話オファー情報
+ycom_telecom_term_course_list_tbl　　　 : テレコム継続コースマスタ
+ycom_telecom_term_user                  : テレコム継続契約者
+ycom_temp_chara_csvr / ycom_tempcsv / ycom_tempcsv_pre / ycom_tempcsvr : CSV取込一時領域
+ycom_toppage_conf_tbl                   : トップページ設定
+ycom_use_dummy_domain_userlevel_tbl     : ダミードメイン利用可否（レベル別）
+ycom_use_point_tbl                      : ポイント消費設定マスタ
+ycom_use_point_log_tbl　　　            : ポイント消費ログとキー
+ycom_user_edit_menu                     : ユーザー編集メニュー設定
+ycom_user_level                         : ユーザーレベルマスタ
+ycom_user_note_for_staff / ycom_user_note_kind : スタッフ用ユーザーメモ
+ycom_userwaiting4delete_log             : 退会待ちユーザー履歴
+ycom_xcoin_card_order_tbl / ycom_xcoin_order_tbl : Xコイン注

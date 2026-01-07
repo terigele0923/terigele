@@ -1,0 +1,101 @@
+1. Git コマンド
+1.1 基本操作（頻度：高）
+
+git status : 現在の変更状況を確認
+
+git add . / git add <ファイル> : ファイルをステージに追加
+
+git commit -m "メッセージ" : コミット（変更を保存）
+
+git pull : リモートから最新の変更を取得・マージ
+
+git push : リモートに変更をアップロード
+
+1.2 ブランチ操作（頻度：中～高）
+
+git branch : ブランチ一覧・現在のブランチ確認
+
+git checkout <ブランチ> : ブランチ切替
+
+git checkout -b <ブランチ> : 新しいブランチ作成 & 切替
+
+git merge <ブランチ> : 指定ブランチを現在ブランチに統合
+
+💡 コンフリクト解決オプション
+
+-X ours : 自分側（現在のブランチ）を優先
+
+-X theirs : マージ先のブランチを優先
+
+1.3 スタッシュとリセット（頻度：中）
+スタッシュ関連
+
+git stash push : 変更を退避
+
+git stash push -m "説明" : メッセージ付き退避
+
+git stash push -a : すべてのファイル退避
+
+git stash list : スタッシュ一覧確認
+
+git stash apply : 適用（削除しない）
+
+git stash pop : 適用 & 削除
+
+git stash drop : スタッシュ削除
+
+git restore ファイルパス：対象ファイルの改修を取り消し
+
+git stash apply stash@{0} スタッシュを復元　削除しない
+
+git stash pop stash@{0}　スタッシュを復元　削除
+
+リセット関連
+
+git reset --hard : 完全に変更を取り消す（注意）
+
+git reset --soft : コミットだけ取り消す（作業内容は残る）
+
+1.4 履歴と差分（頻度：中）
+
+git log : コミット履歴
+
+git diff : 差分確認
+
+git show <コミットID> : 特定コミットの内容を確認
+
+git reflog : HEAD の移動履歴を表示
+
+1.5 リモート操作（頻度：中）
+
+git clone <URL> : リポジトリを複製
+
+git remote -v : リモート一覧確認
+
+git remote add origin <URL> : リモート登録
+
+1.6 メンテナンス・トラブル対応
+
+git revert <コミットID> : 取り消しコミットを作成
+
+git clean -fd : 未追跡ファイル削除
+
+git fetch : 最新情報を取得（マージなし）
+
+master 更新手順
+
+git branch -D master
+git fetch origin
+git checkout -b master origin/master
+
+開発機リリース手順
+1,rocal feature/YOSOU-1209 branch commit & push
+2,ssh p-system.biz の接続
+3,cd /export/www/hosting/bis-hop.jp/yosou002/p-system.bizで対象directoryへ移動
+4,git fetch origin でリモートと同期する
+5,git branchで現在のブランチを確認 if(現在ブランチ != develop) {git stashu git switch develop}
+6,git statusでcommitしてない変更あるかどうかを確認　if(未コミット変更) {stash -m "リリースための一時保存"}
+7,git merge origin feature/YOSOU-XXXXX
+8,git status でコンフリクト確認　if(コンフリクト発生){手動解消}
+9,git add .
+10,git commit -m "YOSOU-1209タスクのリリース"
