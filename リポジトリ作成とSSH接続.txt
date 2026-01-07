@@ -1,0 +1,122 @@
+1. 個人用リポジトリ作成（GitHub）
+
+個人アカウントで GitHub にログイン
+
+Repositories → New
+
+リポジトリ名を入力（例：terigele）
+
+Initialize は空でOK（ローカルから push するため）
+
+作成後、リポジトリページの SSH URL を控える
+例：
+
+git@github.com:terigele0923/terigele.git
+
+2. 個人用 SSH キー作成
+ssh-keygen -t ed25519 -C "personal@example.com" -f ~/.ssh/id_ed25519_private
+
+
+-C はコメント（メールなど）
+
+-f は秘密鍵の保存先
+
+会社用とは別名で作る（混乱防止）
+
+公開鍵を GitHub に登録
+cat ~/.ssh/id_ed25519_private.pub
+
+
+出力内容をコピー
+
+GitHub → Settings → SSH and GPG keys → New SSH key に貼り付け
+
+3. SSH エージェントに登録
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519_private
+
+
+登録されているか確認
+
+ssh-add -l
+
+4. SSH Config 作成（会社用と分ける）
+
+個人用 SSH を別 config にして管理
+
+例：
+
+C:\Users\bis-d\Documents\private-terigele\.ssh\config
+
+
+中身：
+
+Host github-personal
+  HostName github.com
+  User git
+  IdentityFile C:/Users/bis-d/Documents/private-terigele/.ssh/id_ed25519_private
+
+
+Host は任意の名前（例：github-personal）
+
+IdentityFile は個人用鍵へのフルパス
+
+動作確認
+ssh -F C:/Users/bis-d/Documents/private-terigele/.ssh/config -T git@github-personal
+
+
+成功すると：
+
+Hi terigele0923! You've successfully authenticated, but GitHub does not provide shell access.
+
+5. ローカルリポジトリとリモートを紐づけ
+
+リポジトリのディレクトリへ移動
+
+cd C:/Users/bis-d/Documents/private-terigele
+
+
+現在の remote 確認
+
+git remote -v
+
+
+個人用 SSH URL に変更
+
+git remote set-url origin git@github-personal:terigele0923/terigele.git
+
+
+確認
+
+git remote -v
+
+6. ファイルをコミット
+
+ファイルをステージ
+
+git add .
+
+
+コミット
+
+git commit -m "first commit"
+
+7. 個人用 SSH で push
+GIT_SSH_COMMAND='ssh -F C:/Users/bis-d/Documents/private-terigele/.ssh/config' git push -u origin main
+
+
+-u をつけると次回から git push だけで OK
+
+オプション：毎回 -F を省略
+git config core.sshCommand "ssh -F C:/Users/bis-d/Documents/private-terigele/.ssh/config"
+
+
+このリポジトリ内では自動で個人用SSHが使われる
+
+8. 以後の操作
+
+push / pull は通常通り
+
+git add .
+git commit -m "update"
+git push  # 個人用SSHで push
