@@ -1,0 +1,17 @@
+<!-- 整合MongoDB -->
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.mongodb</groupId>
+	<artifactId>mongo-java-driver</artifactId>
+</dependency>
+
+<!-- lombok简化JavaBean代码操作 -->
+<dependency>
+	<groupId>org.projectlombok</groupId>
+	<artifactId>lombok</artifactId>
+	<version>1.18.2</version>
+	<scope>provided</scope>
+</dependency>

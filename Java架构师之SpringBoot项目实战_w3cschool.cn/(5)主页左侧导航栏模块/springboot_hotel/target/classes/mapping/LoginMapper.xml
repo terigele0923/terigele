@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.java.mapper.LoginMapper">
+
+	<!-- 描述一对多的关系，描述OneMenu与TwoMenu之间的关系 -->
+	<resultMap type="cn.java.entity.OneMenu" id="Menu">
+		<result property="id" javaType="Long" column="id" jdbcType="BIGINT" />
+		<result property="oneName" javaType="String" column="oneName"
+			jdbcType="VARCHAR" />
+		<collection property="twoMenuList" ofType="cn.java.entity.TwoMenu">
+			<result property="twoName" javaType="String" column="twoName"
+				jdbcType="VARCHAR" />
+			<result property="twoUrl" javaType="String" column="twoUrl"
+				jdbcType="VARCHAR" />
+			<result property="parent" javaType="Long" column="parent"
+				jdbcType="BIGINT" />
+		</collection>
+	</resultMap>
+
+
+	<!-- 获取system_authority中的所有菜单 -->
+	<select id="getMenus" resultMap="Menu">
+		SELECT * FROM
+		(SELECT id,authority_name AS oneName FROM system_authority WHERE parent=0) t1
+		INNER JOIN
+		(SELECT authority_name AS twoName,authority_url AS twoUrl,parent
+		FROM system_authority WHERE parent!=0) t2
+		ON t2.parent=t1.id
+	</select>
+</mapper>

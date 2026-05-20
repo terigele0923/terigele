@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.java.mapper.SystemUserMapper">
+	
+	<!-- 查询所有系统用户信息与分页查询 -->
+	<select id="getAllUserInfo" parameterType="String"  resultType="Map">
+		SELECT * FROM SYSTEM_USER
+		<if test="_parameter!=null and _parameter!=''">
+			WHERE username=#{0}
+		</if>		
+	</select>
+</mapper>
