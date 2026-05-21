@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>系统菜单</title>
+<link rel="stylesheet" type="text/css" th:href="@{/static/css/style.css}" href="/static/css/style.css" />
+<script type="text/javascript" th:src="@{/static/js/jquery-2.1.4.min.js}" src="/static/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+$(function(){	
+	//导航切换
+	$(".menuson .header").click(function(){
+		var $parent = $(this).parent();
+		$(".menuson>li.active").not($parent).removeClass("active open").find('.sub-menus').hide();
+		
+		$parent.addClass("active");
+		if(!!$(this).next('.sub-menus').size()){
+			if($parent.hasClass("open")){
+				$parent.removeClass("open").find('.sub-menus').hide();
+			}else{
+				$parent.addClass("open").find('.sub-menus').show();	
+			}
+			
+		}
+	});
+	
+	// 三级菜单点击
+	$('.sub-menus li').click(function(e) {
+        $(".sub-menus li.active").removeClass("active")
+		$(this).addClass("active");
+    });
+	
+	$('.title').click(function(){
+		var $ul = $(this).next('ul');
+		$('dd').find('.menuson').slideUp();
+		if($ul.is(':visible')){
+			$(this).next('.menuson').slideUp();
+		}else{
+			$(this).next('.menuson').slideDown();
+		}
+	});
+})	
+</script>
+</head>
+
+<body style="background:#fff3e1;">
+<div class="lefttop"><span></span>功能菜单</div>
+<dl class="leftmenu">
+  <dd>
+    <div class="title"> <span><img th:src="@{/static/images/leftico03.png}" src="/static/images/leftico03.png" alt="入住管理" /></span>入住管理</div>
+    <ul class="menuson">
+      <li>
+        <div class="header"> <cite></cite> <a th:href="@{/bill/inroominfo.html}" href="/bill/inroominfo.html" target="rightFrame">入住信息查询</a> <i></i> </div>
+      </li>
+      <li>
+        <div class="header"> <cite></cite> <a th:href="@{/bill/checkin.html}" href="/bill/checkin.html" target="rightFrame">入住信息添加</a> <i></i> </div>
+      </li>
+      <li class="active">
+        <div class="header"><cite></cite><a th:href="@{/bill/billinfo.html}" href="/bill/billinfo.html" target="rightFrame">消费记录</a><i></i></div>
+      </li>
+      <li>
+        <div class="header">
+        <cite></cite><a th:href="@{/bill/out.html}" href="/bill/out.html" target="rightFrame">结账退房</a><i></i></div>
+      </li>
+    </ul>
+  </dd>
+  <dd>
+    <div class="title"> <span><img th:src="@{/static/images/leftico03.png}" src="/static/images/leftico03.png" alt="订单管理" /></span>订单管理</div>
+    <ul class="menuson">
+      <li><div class="header"><cite></cite><a th:href="@{/order/orderinfo.html}" href="/order/orderinfo.html" target="rightFrame">订单信息</a><i></i></div></li>
+      <li><div class="header"><cite></cite><a th:href="@{/order/addorder.html}" href="/order/addorder.html" target="rightFrame">添加订单</a><i></i></div></li>
+    </ul>
+  </dd>
+  <dd>
+    <div class="title"><span><img th:src="@{/static/images/leftico03.png}" src="/static/images/leftico03.png" alt="会员管理" /></span>会员管理</div>
+    <ul class="menuson">
+      <li>
+        <div class="header"><cite></cite><a th:href="@{/vip/vipinfo.html}" href="/vip/vipinfo.html" target="rightFrame">会员信息查询</a><i></i></div>
+      </li>
+      <li>
+        <div class="header"><cite></cite><a th:href="@{/vip/vipmanage.html}" href="/vip/vipmanage.html" target="rightFrame">会员信息管理</a><i></i></div>
+      </li>
+      <li>
+        <div class="header"><cite></cite><a th:href="@{/vip/addvip.html}" href="/vip/addvip.html" target="rightFrame">添加会员</a><i></i></div>
+      </li>
+    </ul>
+  </dd>
+  <dd>
+    <div class="title"><span><img th:src="@{/static/images/leftico03.png}" src="/static/images/leftico03.png" alt="客房管理" /></span>客房管理</div>
+    <ul class="menuson">
+      <li><div class="header"><cite></cite><a th:href="@{/room/roominfo.html}" href="/room/roominfo.html" target="rightFrame">客房信息查询</a><i></i></div></li>
+      <li><div class="header"><cite></cite><a th:href="@{/room/roommanage.html}" href="/room/roommanage.html" target="rightFrame">客房信息管理</a><i></i></div></li>
+      <li><div class="header"><cite></cite><a th:href="@{/room/addroom.html}" href="/room/addroom.html" target="rightFrame">添加客房</a><i></i></div></li>
+    </ul>
+  </dd>
+  <dd>
+    <div class="title"><span><img th:src="@{/static/images/leftico03.png}" src="/static/images/leftico03.png" alt="用户管理" /></span>用户管理</div>
+    <ul class="menuson">
+      <li><div class="header"><cite></cite><a th:href="@{/user/userinfo.html}" href="/user/userinfo.html" target="rightFrame">用户信息查询</a><i></i></div></li>
+      <li><div class="header"><cite></cite><a th:href="@{/user/usermanage.html}" href="/user/usermanage.html" target="rightFrame">用户信息管理</a><i></i></div></li>
+      <li><div class="header"><cite></cite><a th:href="@{/user/adduser.html}" href="/user/adduser.html" target="rightFrame">添加用户</a><i></i></div></li>
+    </ul>
+  </dd>
+  <dd>
+    <div class="title"><span><img th:src="@{/static/images/leftico03.png}" src="/static/images/leftico03.png" alt="客人意见" /></span><a th:href="@{/suggestion/suggestion.html}" href="/suggestion/suggestion.html" target="rightFrame">客人意见</a></div>
+  </dd>
+</dl>
+</body>
+</html>
