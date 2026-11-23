@@ -11,13 +11,13 @@ Windows PowerShell から、就活データの入力確認と書類生成を行�
 
 ひな型を任意の場所にコピーし、確認できた本人情報と応募先情報を入力します。履歴書と職務経歴書は同じ JSON を使えます。面接対応資料では `application.company` と `application.position` を入力します。
 
-まず入力の基本項目を確認できます。この実行では書類を生成しません。
+生成前に、対象書類の必須項目を `-ValidateOnly` で確認します。空欄や「要確認」などの仮入力、`information_to_confirm` に残っている項目があれば、エラーに表示された項目を本人に確認してください。複数の書類で入力を共有する場合は、対象書類に関係する未確認事項を管理してください。この実行では書類を生成しません。
 
 ```powershell
 .\.agents\scripts\Generate-JobDocuments.ps1 -Document Resume -InputFile .\docs\documents\job-data.json -ValidateOnly
 ```
 
-書類を生成する場合は `-ValidateOnly` を外します。
+本人の回答や元資料で情報を確認したら、`-ValidateOnly` を外して生成します。生成時にも同じ必須項目チェックが働きます。
 
 PowerShell の既定の実行ポリシーでローカルスクリプトが無効な場合は、上の確認を次のコマンドで実行できます。設定はそのプロセス内でのみ有効です。
 
